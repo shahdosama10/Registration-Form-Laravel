@@ -142,7 +142,6 @@ function checkActors() {
     var birthdateParts = birthdate.split("-");
     var month = birthdateParts[1];
     var day = birthdateParts[2];
-    var formattedDate = month + "-" + day;
     
     // Display status message
     document.getElementById("actorsResult").style.display = "block";
@@ -167,7 +166,7 @@ function checkActors() {
             }
         }
     };
-    
-    xhr.open("GET", "getActors?birthdate=" + formattedDate, true);
+    var url = "getActors?month=" + month + "&day=" + day;
+    xhr.open("GET", url, true);
     xhr.send();
 }

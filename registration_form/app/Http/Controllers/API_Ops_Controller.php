@@ -9,25 +9,29 @@ class API_Ops_Controller extends Controller
 {
     public function getActors(Request $request){
         // Check if birthdate is provided
-        if (!$request->has('birthdate') || $request->input('birthdate') === "undefined-undefined") {
+        if (!$request->has('month') || !$request->has('day')) {
             return response()->json(['error' => 'Please provide a birthdate'], 400);
         }
 
-        $birthdate = $request->input('birthdate');
-        $currentYear = date('Y');
-        $birthdateWithYear = $currentYear . '-' . $birthdate;
-        
+        if ($request->input('month') === "undefined" || $request->input('day') === "undefined") {
+            return response()->json(['error' => 'Please provide a birthdate'], 400);
+        }
+    
+        $year = date('Y');
+        $month = $request->input('month');
+        $day = $request->input('day');
+        $stringBirthdate = $year . '-' . $month . '-' . $day;
+
+         
         // Convert the birthdate string into a date object
-        $birthdateDate = strtotime($birthdateWithYear);
-        
+        $birthdate = strtotime($stringBirthdate);
+    
+
         // Check if the conversion was successful
-        if ($birthdateDate === false) {
+        if ($birthdate === false) {
             return response()->json(['error' => 'Invalid birthdate format'], 400);
         }
         
-        // Extract day and month
-        $day = date('d', $birthdateDate);
-        $month = date('m', $birthdateDate);
         $apiKey = env('ACTORS_API_KEY');
         
         $response = Http::withHeaders([
