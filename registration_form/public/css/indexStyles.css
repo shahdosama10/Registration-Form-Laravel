@@ -48,6 +48,7 @@ form {
 
 label {
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input[type="text"],
@@ -71,6 +72,7 @@ input[type="submit"] {
     color: #fff;
     cursor: pointer;
     margin-top: 5px;
+    font-weight: bold;
 }
 
 button[type="button"]:hover,
