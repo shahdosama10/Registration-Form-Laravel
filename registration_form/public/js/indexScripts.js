@@ -136,3 +136,38 @@ function scrollToError(inputId) {
     var inputField = document.getElementById(inputId);
     inputField.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
+
+function checkActors() {
+    var birthdate = document.getElementById("birthdate").value;
+    var birthdateParts = birthdate.split("-");
+    var month = birthdateParts[1];
+    var day = birthdateParts[2];
+    var formattedDate = month + "-" + day;
+    
+    // Display status message
+    document.getElementById("actorsResult").style.display = "block";
+    document.getElementById("actorsResult").innerHTML = "Fetching actors...";
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            if (xhr.status == 200) {
+                // Request successful
+                document.getElementById("actorsResult").innerHTML = formattedActors;
+                var actorsData = JSON.parse(xhr.responseText);
+                var formattedActors = actorsData.map(function(actor) {
+                    return "<div>" + actor + "</div>";
+                }).join("");
+                document.getElementById("actorsResult").innerHTML = "<pre>" +formattedActors + "</pre>" ;
+            } else {
+                // Request failed
+                console.error("Error:", xhr.statusText);
+                var errors = JSON.parse(xhr.responseText);
+                document.getElementById("actorsResult").innerHTML = errors.error;
+            }
+        }
+    };
+    
+    xhr.open("GET", "getActors?birthdate=" + formattedDate, true);
+    xhr.send();
+}
