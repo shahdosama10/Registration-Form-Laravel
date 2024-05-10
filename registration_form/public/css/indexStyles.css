@@ -5,6 +5,7 @@ body {
     background-image: url('imagejfif.jfif');
     background-size: cover;
     background-position: center;
+    position: relative;
 }
 
 body::before {
@@ -25,8 +26,8 @@ body::before {
     display: block;
     color: #ff0000;
     font-size: 14px;
-  }  
-  
+}
+
 .container {
     width: 40%;
     margin: 50px auto;
@@ -34,46 +35,7 @@ body::before {
     border: 1px solid #ccc;
     border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.8);
-    position: relative; 
 }
-/* Add this CSS to style the actorsResult div */
-.actors-result {
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.8);
-    max-height: 200px; /* Adjust height as needed */
-    overflow-y: auto; /* Add scrollbar if content exceeds max-height */
-}
-
-/* Add this CSS to style the appearance of the result text */
-.actors-result p {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.actors-result ul {
-    list-style-type: disc; /* Use disc bullet points */
-    margin-left: 20px; /* Adjust indentation as needed */
-}
-
-.actors-result li {
-    margin-bottom: 5px;
-}
-
-.header {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 2px;
-    text-align: center;
-}
-
-.footer {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 0.5px;
-    text-align: center;
-}
-
 
 h1 {
     text-align: center;
