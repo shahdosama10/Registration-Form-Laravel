@@ -1,5 +1,8 @@
 // Function to validate the form and handle submission
 function validateForm(event) {
+
+    event.preventDefault();
+
     // Clear previous error messages
     clearErrors();
 
@@ -13,9 +16,11 @@ function validateForm(event) {
     var phone = formData.get('phone');
     var address = formData.get('address');
     var password = formData.get('password');
-    var confirmPassword = formData.get('confirm_password');
+    var confirmPassword = formData.get('password_confirmation');
     var email = formData.get('email');
     var userImage = formData.get('user_image');
+    // Fetch CSRF token from meta tag
+    
 
     // Regular expression patterns
     var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -67,9 +72,10 @@ function validateForm(event) {
         return false;
     }
 
+
     if (password !== confirmPassword) {
-        showError('confirm_password', 'Passwords do not match.');
-        scrollToError('confirm_password');
+        showError('password_confirmation', 'Passwords do not match.');
+        scrollToError('password_confirmation');
         return false;
     }
 
@@ -85,30 +91,40 @@ function validateForm(event) {
         return false;
     }
 
-    // If the form validation passes, proceed with form submission
-    submitFormData(formData);
-    return false; // Prevent default form submission
-}
+    var token = $('meta[name="csrf-token"]').val();
 
-// Function to handle AJAX form submission
-function submitFormData(formData) {
+    var registerRoute = $('#registerRoute').val();
+
+    $.ajaxSetup({
+       headers : {
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+       } 
+    });
+
+    // If the form validation passes, proceed with form submission
     $.ajax({
-        type: "POST",
-        url: "{{ route('registerUser') }}", // Point to Laravel route
+        type: 'POST',
+        url: registerRoute, // Point to Laravel route
         data: formData,
+        dataType : 'json',
         processData: false,
         contentType: false,
+        cache : false,
+        
         success: function(response) {
             // Handle successful response
-            alert(response);
-            if (response.trim() === "Sign up successfully") {
+            alert(response['message']);
+            if (response['message'].trim() === "Registration successful!") {
                 // Reload the page or perform other actions as needed
                 window.location.reload();
             }
         },
         error: function(error) {
-            // Handle error response from server
-            alert('An error occurred: ' + error.responseText);
+            var errorMessage = "An error occurred.";
+            if (error.responseJSON && error.responseJSON.message) {
+                errorMessage = error.responseJSON.message;
+            }
+            alert(errorMessage);
         }
     });
 }
@@ -129,7 +145,10 @@ function clearErrors() {
     while (errorMessages.length > 0) {
         errorMessages[0].parentNode.removeChild(errorMessages[0]);
     }
+    return false; // Prevent default form submission
 }
+
+// Function to handle AJAX form submission
 
 // Function to scroll to the form field with an error
 function scrollToError(inputId) {

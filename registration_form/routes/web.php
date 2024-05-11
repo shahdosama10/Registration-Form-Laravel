@@ -13,7 +13,7 @@ Route::get('/', function () {
     return view('register');
 });
 
-Route::post('/register', [RegistrationController::class, 'register'])->name('register');
+Route::post('/register', [RegistrationController::class, 'register'])->name('register.register');
 Route::get('/getActors', [API_Ops_Controller::class, 'getActors'])->name('API');
 
 Route::get('/{lang?}', function ($lang = "en") {
