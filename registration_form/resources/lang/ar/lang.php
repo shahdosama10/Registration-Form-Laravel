@@ -13,4 +13,9 @@ return [
     'user_image' => 'صورة المستخدم',
     'check_actors' => 'التحقق من الممثلين',
     'registration_success' => 'تم التسجيل بنجاح!',
+    'registration_failed' => 'فشل التسجيل!',
+    'register' => 'تسجيل',
+    'header' => 'مرحبًا بك في صفحة التسجيل لدينا',
+    'footer' => 'جميع الحقوق محفوظة',
+
 ];

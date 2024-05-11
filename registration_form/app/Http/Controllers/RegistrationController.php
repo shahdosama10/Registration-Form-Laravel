@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewUserRegistered;
+use Illuminate\Support\Facades\App;
+
 
 class RegistrationController extends Controller
 {
@@ -47,4 +49,14 @@ class RegistrationController extends Controller
 
         return redirect('/')->with('success', 'User registered successfully!');
     }
+
+    public function lang($lang)
+    {
+        if(in_array($lang, ['en', 'ar'])) {
+            App::setLocale($lang);
+        }
+        return back();
+    }
+
+
 }

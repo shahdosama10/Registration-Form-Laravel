@@ -13,4 +13,8 @@ return [
     'user_image' => 'User Image',
     'check_actors' => 'Check Actors',
     'registration_success' => 'Registration successful!',
+    'registration_failed' => 'Registration failed!',
+    'register' => 'Register',
+    'header' => 'Welcome to our Registration Page',
+    'footer' => '2024 All rights reserved',
 ];
