@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\App;
 
+use function Termwind\style;
+
 Route::get('/', function () {
     return view('register');
 });
@@ -16,6 +18,7 @@ Route::get('/getActors', [API_Ops_Controller::class, 'getActors'])->name('API');
 
 Route::get('/{lang?}', function ($lang = "en") {
     if ($lang) {
+        
         App::setLocale($lang);
     }
     return view('register');
