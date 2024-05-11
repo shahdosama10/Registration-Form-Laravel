@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html dir="{{ app()->isLocale('ar') ? 'rtl' : 'ltr' }}" lang="{{ app()->getLocale() }}">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Page</title>
-    <link rel="stylesheet" href="{{ asset('css/indexStyles.css') }}">
-</head>
-<body>
-@include('layout.header')
-
-
+@extends('layout.master')
+@section('title')
+    Registration Form
+@endsection
+@section('content')
     <div class="container">
         <h1>{{ __('lang.registration_form') }}</h1>
         <form method="POST" class="input_form" action="{{ route('register') }}" enctype="multipart/form-data" onsubmit="return validateForm(event);">
@@ -57,9 +49,6 @@
             <input type="submit" value="{{ __('lang.register') }}">
         </form>
     </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ asset('js/indexScripts.js') }}"></script>
-    @include('layout.footer')
-</body>
-</html>
+@endsection
