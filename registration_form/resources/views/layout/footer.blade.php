@@ -1,3 +1,3 @@
 <footer class="footer">
-    <p>&copy; 2024 All rights reserved</p>
+    <p>&copy; 2024 - {{ __('lang.footer') }}</p>
 </footer>
