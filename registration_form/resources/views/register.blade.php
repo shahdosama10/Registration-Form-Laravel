@@ -5,7 +5,8 @@
 @section('content')
     <div class="container">
         <h1>{{ __('lang.registration_form') }}</h1>
-        <form method="POST" class="input_form" action="{{ route('register') }}" enctype="multipart/form-data" onsubmit="return validateForm(event);">
+        <div id="language" data-language="{{ app()->getLocale() }}"></div>
+        <form method="POST" class="input_form" enctype="multipart/form-data" onsubmit="validateForm(event);">
             @csrf
 
             <label for="full_name">{{ __('lang.full_name') }}:</label>
@@ -49,6 +50,15 @@
             <input type="submit" value="{{ __('lang.register') }}">
         </form>
     </div>
+
+    <script>
+        var messages = @json(__('lang')); 
+    </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ asset('js/indexScripts.js') }}"></script>
+   
+
+
+    <input type="hidden" id="registerRoute" value ="{{ route('register.register') }}">
 @endsection
