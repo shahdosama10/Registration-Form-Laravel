@@ -1,7 +1,12 @@
 // Function to validate the form and handle submission
+
 function validateForm(event) {
 
     event.preventDefault();
+
+    // get the current language 
+    var language = document.getElementById('language').getAttribute('data-language');
+    
 
     // Clear previous error messages
     clearErrors();
@@ -28,68 +33,71 @@ function validateForm(event) {
     var phonePattern = /^\+?([0-9]\s?){6,14}[0-9]$/;
     var namePattern = /^[a-zA-Z\s]+$/;
 
+   
+
     // Form validation
     if (fullName.trim() === '' || !namePattern.test(fullName)) {
-        showError('full_name', 'Please enter a valid full name.');
+        showError('full_name',messages.full_nameError);
         scrollToError('full_name');
         return false;
     }
 
     if (userName.trim() === '') {
-        showError('user_name', 'Please enter a username.');
+       showError('user_name',messages.usernameError);
         scrollToError('user_name');
         return false;
     }
 
     if (birthdate === '') {
-        showError('birthdate', 'Please select your birthdate.');
+        showError('birthdate', messages.birthdateError);
         scrollToError('birthdate');
         return false;
     }
 
     var birthYear = new Date(birthdate).getFullYear();
     if (birthYear > 2005) {
-        showError('birthdate', 'You must be born in 2005 or earlier to register.');
+       showError('birthdate', messages.birthdateError2);
         scrollToError('birthdate');
         return false;
     }
 
     if (phone.trim() === '' || !phonePattern.test(phone)) {
-        showError('phone', 'Please enter a valid phone number.');
+        showError('phone', messages.phoneError);
         scrollToError('phone');
         return false;
     }
 
     if (address.trim() === '') {
-        showError('address', 'Please enter your address.');
+        showError('address', messages.addressError);
         scrollToError('address');
         return false;
     }
 
     if (!passwordPattern.test(password)) {
-        showError('password', 'Password must be at least 8 characters long and contain at least one number and one special character.');
+        showError('password', messages.passwordError);
         scrollToError('password');
         return false;
     }
 
 
     if (password !== confirmPassword) {
-        showError('password_confirmation', 'Passwords do not match.');
+        showError('password_confirmation', messages.confirm_passwordError);
         scrollToError('password_confirmation');
         return false;
     }
 
     if (!emailPattern.test(email)) {
-        showError('email', 'Please enter a valid email address.');
+        showError('email', messages.emailError);
         scrollToError('email');
         return false;
     }
 
     if (!userImage) {
-        showError('user_image', 'Please upload your profile picture.');
+        showError('user_image', messages.user_imageError);
         scrollToError('user_image');
         return false;
     }
+
 
     var token = $('meta[name="csrf-token"]').val();
 
@@ -113,8 +121,8 @@ function validateForm(event) {
         
         success: function(response) {
             // Handle successful response
-            alert(response['message']);
-            if (response['message'].trim() === "Registration successful!") {
+            alert(messages.registration_success);
+            if (response['message'].trim() === "Registration successful!") { 
                 // Reload the page or perform other actions as needed
                 window.location.reload();
             }
@@ -124,7 +132,8 @@ function validateForm(event) {
             if (error.responseJSON && error.responseJSON.message) {
                 errorMessage = error.responseJSON.message;
             }
-            alert(errorMessage);
+            alert(messages.registration_failed+'\n'+errorMessage);
+            
         }
     });
 }

@@ -17,4 +17,15 @@ return [
     'register' => 'Register',
     'header' => 'Welcome to our Registration Page',
     'footer' => '2024 All rights reserved',
+    'full_nameError'=> 'Please enter full name',
+    'usernameError'=> 'Please enter username',
+    'birthdateError'=> 'Please enter birthdate',
+    'birthdateError2'=>'You must be born in 2005 or earlier to register',
+    'phoneError'=> 'Please enter a valid phone number',
+    'addressError'=> 'Please enter address',
+    'passwordError'=>'Password must be at least 8 characters long and contain at least one number and one special character',
+    'confirm_passwordError'=> 'Passwords do not match',
+    'emailError'=> 'Please enter a valid email',
+    'user_imageError'=> 'Please upload a profile picture',
+    
 ];
