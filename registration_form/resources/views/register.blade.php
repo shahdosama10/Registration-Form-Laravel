@@ -44,7 +44,7 @@
             <br>
 
             <label for="user_image">{{ __('lang.user_image') }}:</label>
-            <input type="file" id="user_image" name="user_image" accept="image/*" required>
+            <input type="file" id="user_image" name="user_image" accept="image/*">
             <br>
 
             <input type="submit" value="{{ __('lang.register') }}">

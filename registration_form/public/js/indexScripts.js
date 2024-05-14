@@ -73,6 +73,8 @@ function validateForm(event) {
         return false;
     }
 
+    
+
     if (!passwordPattern.test(password)) {
         showError('password', messages.passwordError);
         scrollToError('password');
@@ -92,11 +94,14 @@ function validateForm(event) {
         return false;
     }
 
-    if (!userImage) {
+    if (userImage.name === '') {
         showError('user_image', messages.user_imageError);
         scrollToError('user_image');
         return false;
     }
+
+
+  
 
 
     var token = $('meta[name="csrf-token"]').val();
