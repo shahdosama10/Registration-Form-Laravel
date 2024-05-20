@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\NewUserRegistered;
+use App\Mail\NewUserRegistration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\JsonResponse;
 
@@ -62,7 +62,7 @@ class RegistrationController extends Controller
     }
 
     // Send email notification
-    Mail::to('otpsender89@gmail.com')->send(new NewUserRegistered($validatedData['user_name']));
+    Mail::to('sda805400@gmail.com')->send(new NewUserRegistration($validatedData['user_name']));
 
     return new JsonResponse(['message' =>'Registration successful!'], 200);
 }

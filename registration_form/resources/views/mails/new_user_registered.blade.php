@@ -1,6 +1,1 @@
-@component('mail::message')
-A new user {{ $userName }} is registered to the system.
-
-Thanks,<br>
-{{ config('app.name') }}
-@endcomponent
+<p>Hello, a new user has registered with the username: {{ $userName }}</p>
